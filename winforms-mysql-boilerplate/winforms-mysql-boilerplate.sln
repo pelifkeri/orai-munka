@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "winforms-mysql-boilerplate", "winforms-mysql-boilerplate\winforms-mysql-boilerplate.csproj", "{0A4F2368-C753-4461-9D31-196A61FFB4FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A4F2368-C753-4461-9D31-196A61FFB4FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A4F2368-C753-4461-9D31-196A61FFB4FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A4F2368-C753-4461-9D31-196A61FFB4FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A4F2368-C753-4461-9D31-196A61FFB4FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1CC5E7B6-C7CA-4ED6-B40B-B19F2DFA699E}
+	EndGlobalSection
+EndGlobal
