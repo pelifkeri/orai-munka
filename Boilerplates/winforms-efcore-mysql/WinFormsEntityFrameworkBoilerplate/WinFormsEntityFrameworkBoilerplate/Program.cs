@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace winforms_mysql_boilerplate
+namespace WinFormsEntityFrameworkBoilerplate
 {
     static class Program
     {

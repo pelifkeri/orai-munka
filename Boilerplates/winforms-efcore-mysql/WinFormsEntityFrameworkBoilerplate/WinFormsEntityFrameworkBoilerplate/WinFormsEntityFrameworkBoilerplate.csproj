@@ -3,12 +3,11 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>winforms_mysql_boilerplate</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MySql.Data" Version="8.0.22" />
+    <ProjectReference Include="..\WinFormsEntityFrameworkBoilerplate.Database\WinFormsEntityFrameworkBoilerplate.Database.csproj" />
   </ItemGroup>
 
 </Project>
