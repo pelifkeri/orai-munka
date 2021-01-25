@@ -79,5 +79,49 @@ namespace WinFormsEntityFrameworkBoilerplate
 
             await GetFruitsIntoListbox(context);
         }
+
+        private async void OnUpdateClicked(object sender, EventArgs e)
+        {
+            var selectedFruit = (Fruit)listBox1.SelectedItem;
+            using var context = new DatabaseContext();
+
+            var fruitInDatabase = await context.Fruits.FindAsync(selectedFruit.Id);
+            fruitInDatabase.Megnevezes = txtNev.Text;
+            fruitInDatabase.Color = txtSzin.Text;
+
+            await context.SaveChangesAsync();
+            await GetFruitsIntoListbox(context);
+            OnClearClicked(new object(), new EventArgs());
+        }
+
+        private void OnClearClicked(object sender, EventArgs e)
+        {
+            txtNev.Text = "";
+            txtSzin.Text = "";
+        }
+
+        private void OnSelectedListItemChanged(object sender, EventArgs e)
+        {
+            CheckIfUpdateButtonIsClickable();
+            var selectedFruit = (Fruit)listBox1.SelectedItem;
+
+            txtNev.Text = selectedFruit.Megnevezes;
+            txtSzin.Text = selectedFruit.Color;
+        }
+
+        private void txtNev_TextChanged(object sender, EventArgs e)
+        {
+            CheckIfUpdateButtonIsClickable();
+        }
+
+        private void txtSzin_TextChanged(object sender, EventArgs e)
+        {
+            CheckIfUpdateButtonIsClickable();
+        }
+
+        private void CheckIfUpdateButtonIsClickable()
+        {
+            btnUpdate.Enabled = listBox1.SelectedIndex != -1 && !string.IsNullOrWhiteSpace(txtNev.Text) && !string.IsNullOrWhiteSpace(txtSzin.Text);
+        }
     }
 }
