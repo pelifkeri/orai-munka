@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using WebServerEntityFramework.DTOs;
 using WebServerEntityFramework.Exceptions;
 using WebServerEntityFramework.Interfaces;
+using WebServerEntityFramework.Validation;
 
 namespace WebServerEntityFramework.Controllers
 {
