@@ -8,6 +8,7 @@ namespace WebServerEntityFramework.Validation
     {
         public UserValidator()
         {
+            RuleFor(x => x.Id).GreaterThan(0).When(x => x.Id != null);
             RuleFor(x => x.Name).NotEmpty().Length(1, 30);
             RuleFor(x => x.DayOfBirth)
                 .NotEmpty()

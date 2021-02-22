@@ -1,34 +1,27 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using WebServer.Database;
+using WebServer.Database.Interfaces;
 using WebServer.Database.Models;
 using WebServerEntityFramework.DTOs;
-using WebServerEntityFramework.Exceptions;
 using WebServerEntityFramework.Interfaces;
 
 namespace WebServerEntityFramework.Services
 {
     public class UserService : IUserService
     {
-        private readonly DatabaseContext _context;
+        private readonly IRepository<User> _repository;
         private readonly IMapper _mapper;
 
-        public UserService(DatabaseContext context, IMapper mapper)
+        public UserService(IRepository<User> repository, IMapper mapper)
         {
-            _context = context;
+            _repository = repository;
             _mapper = mapper;
         }
 
         public async Task<List<UserDto>> GetAllUsers()
         {
-            var users = await _context.Users.ToListAsync();
-
-            if (users.Count == 0)
-            {
-                throw new UserNotFoundException();
-            }
+            var users = await _repository.ListAllAsync();
 
             var result = _mapper.Map<List<UserDto>>(users);
 
@@ -37,45 +30,27 @@ namespace WebServerEntityFramework.Services
 
         public async Task<UserDto> CreateNewUser(UserDto user)
         {
-            var dbEntity = _mapper.Map<User>(user);
+            var entity = _mapper.Map<User>(user);
 
-            var result = await _context.Users.AddAsync(dbEntity);
-            await _context.SaveChangesAsync();
+            var result = await _repository.AddAsync(entity);
 
-            var response = _mapper.Map<UserDto>(result.Entity);
+            var response = _mapper.Map<UserDto>(result);
 
             return response;
         }
 
         public async Task DeleteUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-
-            if (user == null)
-            {
-                throw new UserNotFoundException();
-            }
-
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
+            await _repository.DeleteAsync(id);
         }
 
         public async Task<UserDto> UpdateUser(int id, UserDto user)
         {
-            var entity = await _context.Users.FindAsync(id);
+            var entity = _mapper.Map<User>(user);
 
-            if (entity == null)
-            {
-                throw new UserNotFoundException();
-            }
+            var result = await _repository.UpdateAsync(entity, id);
 
-            _context.Entry(entity).CurrentValues.SetValues(user);
-            _context.Entry(entity).State = EntityState.Modified;
-            _context.Entry(entity).Property(x => x.Id).IsModified = false;
-
-            await _context.SaveChangesAsync();
-
-            var response = _mapper.Map<UserDto>(entity);
+            var response = _mapper.Map<UserDto>(result);
 
             return response;
         }

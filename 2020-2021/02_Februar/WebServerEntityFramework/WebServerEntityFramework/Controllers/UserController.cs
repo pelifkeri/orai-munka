@@ -2,10 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using WebServer.Database.Exceptions;
 using WebServerEntityFramework.DTOs;
-using WebServerEntityFramework.Exceptions;
 using WebServerEntityFramework.Interfaces;
-using WebServerEntityFramework.Validation;
 
 namespace WebServerEntityFramework.Controllers
 {
@@ -29,7 +28,7 @@ namespace WebServerEntityFramework.Controllers
 
                 return Ok(users);
             }
-            catch (UserNotFoundException)
+            catch (EntityNotFoundException)
             {
                 return NotFound("Nem található user az adatbázisban.");
             }
@@ -63,7 +62,7 @@ namespace WebServerEntityFramework.Controllers
 
                 return Ok();
             }
-            catch (UserNotFoundException)
+            catch (EntityNotFoundException)
             {
                 return NotFound("Nem található a user az adatbázisban.");
             }
@@ -82,7 +81,7 @@ namespace WebServerEntityFramework.Controllers
 
                 return Ok(response);
             }
-            catch (UserNotFoundException)
+            catch (EntityNotFoundException)
             {
                 return NotFound("Nem található a user az adatbázisban.");
             }

@@ -2,9 +2,9 @@
 using Moq;
 using System;
 using System.Threading.Tasks;
+using WebServer.Database.Exceptions;
 using WebServerEntityFramework.Controllers;
 using WebServerEntityFramework.DTOs;
-using WebServerEntityFramework.Exceptions;
 using WebServerEntityFramework.Interfaces;
 using Xunit;
 
@@ -46,7 +46,7 @@ namespace WebServerEntityFramework.Tests.Controllers
             {
                 // arrange
                 _userServiceMock.Setup(x => x.GetAllUsers())
-                    .Throws<UserNotFoundException>();
+                    .Throws<EntityNotFoundException>();
 
                 // act
                 var result = await _userController.GetUsers();
