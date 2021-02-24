@@ -1,10 +1,12 @@
-﻿using WebServerEntityFramework.DTOs;
+﻿using System.Diagnostics.CodeAnalysis;
+using WebServerEntityFramework.DTOs;
 using WebServerEntityFramework.Tests.TestData;
 using WebServerEntityFramework.Validation;
 using Xunit;
 
 namespace WebServerEntityFramework.Tests.Validation
 {
+    [ExcludeFromCodeCoverage]
     public class UserValidatorTests
     {
         private readonly UserValidator _validator;
@@ -14,7 +16,7 @@ namespace WebServerEntityFramework.Tests.Validation
             _validator = new UserValidator();
         }
 
-        [Fact]
+        [Fact(Skip = "valami ok")]
         public void ShouldSucceed_WhenValidDtoWasGiven()
         {
             // arrange
